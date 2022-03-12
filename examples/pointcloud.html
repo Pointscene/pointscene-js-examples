@@ -1,0 +1,44 @@
+<!doctype html>
+<html>
+  <head>
+    <script src="lib/pointscene.umd.js"></script>
+    <style>
+      body {
+        padding: 0px;
+        margin: 0px;
+        background-color: #bc0000;
+        overflow: hidden;
+      }
+      #pointscene-view {
+        width: 100%; 
+        height: 100vh; 
+        padding: 0px; 
+        margin: 0px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="pointscene-view"></div>
+
+    <script>
+      let pointscene;
+
+      const load = async () => {
+        let domEl = document.querySelector('#pointscene-view');
+        
+        pointscene = Pointscene.init({
+          domEl,
+        });
+
+        await pointscene.loadPointcloud('https://api.pointscene.com/stream/sig/bAIO.1k1iwgy9.ee8ac8f5df3ca77663f844abb7390f42733861b2f3e62a7f6c7646bd30a7a43b/3ztkK');
+
+        pointscene.fitTopView();
+        pointscene.modules.controls.keyboardEnabled = true;
+      };
+
+      window.onload = async () => {
+        load();
+      }
+    </script>
+  </body>
+</html>
